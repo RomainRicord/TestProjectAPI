@@ -46,7 +46,7 @@ app.post('/register',cors(cors_opt),(req,res) => {
             res.send('no')
         }else{
             console.log('Connected find '+docs+' '+typeof(docs)+' '+String(docs).length)
-            if (String(docs).length > 0){
+            if (String(docs).length <= 0){
                 const small = new RegisterModel({ user: user,password: password });
                 small.save((err) => {
                     if (err){
@@ -55,14 +55,11 @@ app.post('/register',cors(cors_opt),(req,res) => {
                 });
                 res.send('yes')
             }else{
-                res.send('no')
+                res.statusCode = 403;
+                res.end('no');
             }
         }
     })
-
-    console.log(`I WANT REGISTER WITH USER ${user} AND PASSWORD ${password}`)
-
-    res.end('yes')
 })
 
 app.post('/login',cors(cors_opt),(req,res) => {
