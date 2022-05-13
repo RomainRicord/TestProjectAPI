@@ -53,10 +53,11 @@ app.post('/register',cors(cors_opt),(req,res) => {
                         console.log('Error /register '+err)
                     };
                 });
+                res.statusCode = 200;
                 res.send('yes')
             }else{
                 res.statusCode = 403;
-                res.end('no');
+                res.send('no');
             }
         }
     })
